@@ -1,0 +1,27 @@
+1. http://inventwithpython.com/chapter17.html
+
+2. https://lorenzod8n.wordpress.com/category/pygame-tutorial/
+
+3. (obviously, documentation) http://www.pygame.org/docs/
+
+4. http://inventwithpython.com/blog/2010/09/01/the-top-10-pygame-tutorials/
+
+5. http://www.pythonforbeginners.com/files/reading-and-writing-files-in-python
+
+6. http://www.math.yorku.ca/~zabrocki/math2042/Monopoly/prices.html
+
+7. http://www.gamedev.net/topic/597332-an-expert-system-for-monopoly/
+
+8. http://www.gamedev.net/topic/545927-ai-for-monopoly-game/
+
+9. http://www.tkcs-collins.com/truman/monopoly/monopoly.shtml
+
+10. http://stackoverflow.com/ - Q/A site for programmers (for many things not to mention individually)
+	-http://stackoverflow.com/questions/28921507/how-switch-full-screen-in-a-pygame-surface-window 
+	-http://stackoverflow.com/questions/6239769/how-can-i-crop-an-image-with-pygame
+
+11. https://www.youtube.com/watch?v=xBN2LJA0Src
+
+12. http://www.pygame.org/project-EzText-920-.html (for EzText module)
+
+13. Images from shutterstock.com , clipart.me , openclipart.org , 

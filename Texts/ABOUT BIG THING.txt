@@ -1,0 +1,8 @@
+The MONOPOLY name and logos are trademarks of Hasbro and published by Hasbro, Parker Brothers and Waddingtons. The distinctive design of the gameboard, the four corner squares, the MR. MONOPOLY name and character, as well as each of the distinctive elements of the board and playing pieces, are trademarks of Hasbro, Inc. for its property trading game and game equipment. We do not own any of the original MONOPOLY elements. This theme is part of this group project by Anand Koonath, Praveena Ramalingam and Vineet Jiji Cherian and in no means is reproduced or used for any other purposes than educational. 
+Created using Python and Pygame module. 
+Pictures of the elements of MONOPOLY obtained from Google images. Editing done using Paint, MS Word and PicMonkey.
+Created by Anand Koonath, Praveena Ramalingam and Vineet Jiji Cherian 
+of Class of 2016 of Al Khor International School.
+
+[Copyright of theme MONOPOLY ©1935, 2015 Hasbro, Pawtucket, RI 02862. All Rights Reserved.]
+
