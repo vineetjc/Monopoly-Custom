@@ -57,7 +57,7 @@ pygame.mixer.music.play(-1)
 
 menu=0
 
-open('pythontest.txt', 'w').close() #Clear out the file contents
+open('playerdetaillog.txt', 'w').close() #Clear out the file contents
 
 while True:
     for event in pygame.event.get():
@@ -157,7 +157,7 @@ while True:
 
             print "Writing...."
 
-            target=open('pythontest.txt','a')
+            target=open('playerdetaillog.txt','a')
 
             for i in Players:
                 line1=i.Name

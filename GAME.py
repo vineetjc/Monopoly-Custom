@@ -24,12 +24,12 @@ from tokenselect import tokenlist
 
 tokennames=['Car','Dog','Thimble','Trolley','Ship','Iron','Hat','Shoe']
 
-load_profile = open('pythontest.txt','r')
+load_profile = open('playerdetaillog.txt','r')
 
 print 'reading....'
 print load_profile.read()
 
-load_profile = open('pythontest.txt','r')
+load_profile = open('playerdetaillog.txt','r')
 
 for i, l in enumerate(load_profile):#print i,l prints line number from 0 with content in each line!             
     pass
@@ -37,10 +37,10 @@ playerno= (i + 1)/2 #number of lines (counts from 0)
 
 print 'players:',playerno
 
-load_profile = open('pythontest.txt','r')
+load_profile = open('playerdetaillog.txt','r')
 read_it = load_profile.read().splitlines()
 
-#playerno=file_len('pythontest.txt')/2
+#playerno=file_len('playerdetaillog.txt')/2
 
 #print playerno
 
