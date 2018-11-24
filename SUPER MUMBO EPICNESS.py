@@ -31,8 +31,6 @@ P3Colour=(255,253,196)
 P4Colour=(213,234,211)
 PxColours=[P1Colour,P2Colour,P3Colour,P4Colour]
 
-windowSurface.fill(WHITE)
-
 #Loading pictures
 home=pygame.image.load('Images/homescreen.jpeg')
 about=pygame.image.load('Images/about.png')
@@ -40,9 +38,6 @@ playerscreen=pygame.image.load('Images/chooseplayerbg.jpg')
 button=pygame.image.load('Images/home.png')
 playername=pygame.image.load('Images/playerinputbg.jpg')
 
-#MAIN PROGRAM
-#setting a clock (mainly for ticks - fps)
-clock = pygame.time.Clock()
 #list of players
 Player1=0
 Player2=0
@@ -50,52 +45,51 @@ Player3=0
 Player4=0
 Players=[Player1, Player2, Player3, Player4]
 
-
+#set up mixer
 pygame.mixer.init()
 pygame.mixer.music.load('Sound Track/Menu Music.mp3')
 pygame.mixer.music.play(-1)
 
 menu=0
 
-open('playerdetaillog.txt', 'w').close() #Clear out the file contents
+open('playerdetaillog.txt', 'w').close() #Open a log file/clear out the file contents
 
 while True:
     for event in pygame.event.get():
         if event.type==QUIT:            #i.e. clicking the x button
             pygame.quit()
             sys.exit()
+
         #START SCREEN
         if menu==0:
             windowSurface.blit(pygame.transform.scale(home, (960,640)), (0,0))
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 x, y = event.pos
                 if 20<=x<=256 and 253<=y<=335: #How to play
-                    windowSurface.fill(BLACK)
                     howtoplay((960,640))
                 elif 20<=x<=352 and 368<=y<=465: #About the game
                     windowSurface.blit(pygame.transform.scale(about, (960,640)), (0,0))
-                    A=1
-                    while A==1:
+                    clickedhome = False
+                    while not clickedhome:
                         for event in pygame.event.get():
                             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                                if event.type==QUIT:            #i.e. clicking the x button
+                                    pygame.quit()
+                                    sys.exit()
                                 x,y=event.pos
                                 if 10<=x<=155 and 518<=y<=635: #Home button in About section
-                                    print "clicked home"
-                                    A=0
+                                    clickedhome = True
                         pygame.display.update()
                 elif 20<=x<=130 and 133<=y<=220: #Start game
-                    print "you clicked START"
                     menu=1
 
-        #CLICKED START
+        #player number screen
         while menu==1:
-            #player number screen
-            clock.tick(30)
             windowSurface.blit(pygame.transform.scale(playerscreen, (960,640)), (0,0))
             buttonclick=button.get_rect(center=(116,347))
-            windowSurface.blit(button,buttonclick)
+            windowSurface.blit(button, buttonclick)
             for event in pygame.event.get():
-                if event.type==QUIT:            #i.e. clicking the x button
+                if event.type==QUIT: #i.e. clicking the x button
                     pygame.quit()
                     sys.exit()
                 elif event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
@@ -111,25 +105,19 @@ while True:
                         playerno=3
                     elif 625<=x<=888 and 380<=y<=612: #4
                         playerno=4
-                    if playerno in [1,2,3,4]:
+                    if playerno>0:
                         menu=2
             pygame.display.flip()
 
-        #after choosing no. of players
+        #Player name input and token select
         if menu==2:
-            for event in pygame.event.get():
-                if event.type==QUIT:
-                    pygame.quit()
-                    sys.exit()
-                #need to work on this still
-                variable=Playerinput(playerno)
-                if variable==1:
-                    blah=0
-                    menu=1
-                    break
-                else:
-                    menu=3
-                pygame.display.flip()
+            playerinputdone=Playerinput(playerno)
+            if not playerinputdone:
+                menu=1
+                break
+            else:
+                menu=3
+            pygame.display.flip()
 
         #False loading screen showing tips
         if menu==3:

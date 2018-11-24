@@ -1,12 +1,10 @@
-#IT WORKS!!!!!!! B| 
-
 import pygame, sys, random,time, eztext
 from pygame.locals import *
 
 pygame.init()
 
 #setup the window display
-windowSurface = pygame.display.set_mode((960,640), 0, 32)  
+windowSurface = pygame.display.set_mode((960,640), 0, 32)
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 
 #setup font
@@ -71,13 +69,13 @@ def tokenselect(playerno,MEGALIST):
                         q-=1
                         for l in rectangles:
                             if x==i:
-                                if l==i:                                    
-                                    blacklist.pop()                                    
-                                    rectangles[rectangles.index(l)]='changed'                                    
-                                    x-=1                                    
+                                if l==i:
+                                    blacklist.pop()
+                                    rectangles[rectangles.index(l)]='changed'
+                                    x-=1
                         x=0
                         break
-                       
+
                 if startbox.collidepoint(pos):
                     print "home"
                     return 10 #then to main program
@@ -100,10 +98,10 @@ def tokenselect(playerno,MEGALIST):
                         print blacklist
                         print
                         print MEGALIST
-                        
-                        
-                    
-                #print SUPER #which contains tuples of name and image 
+
+
+
+                #print SUPER #which contains tuples of name and image
                 if i<=playerno:
                     for k in rectangles:
                         if type(k)!=int:
@@ -115,7 +113,7 @@ def tokenselect(playerno,MEGALIST):
                                 x=0
                                 rectangles[rectangles.index(k)]=i-1 #change rectangle type to int
                                 break
-                    
+
             j=130
             windowSurface.blit(pygame.transform.scale(BG, (960,640)), (0,0))
             if x==0:
@@ -139,14 +137,14 @@ def tokenselect(playerno,MEGALIST):
                     if x<i-1:
                         blacklist[x]=(rectangles[e])#check for ones already finished
                         x+=1
-                    pygame.draw.rect(windowSurface, BLACK, (buttonclick.left, buttonclick.top, buttonclick.width, buttonclick.height))                
+                    pygame.draw.rect(windowSurface, BLACK, (buttonclick.left, buttonclick.top, buttonclick.width, buttonclick.height))
                 else:
                     rectangles[e]=buttonclick
                     pygame.draw.rect(windowSurface, WHITE, (buttonclick.left, buttonclick.top, buttonclick.width, buttonclick.height))
-                        
+
                 windowSurface.blit(tokenlist[e],buttonclick)
                 j+=240
-                
+
             if i>playerno:
                 fini=basicFont.render('Click OK to proceed to game!', True, VIOLET)
                 box=fini.get_rect(center=(500,600))
@@ -157,7 +155,7 @@ def tokenselect(playerno,MEGALIST):
                 prompts = basicFont.render('Player '+str(i)+" "+MEGALIST[q]+' choose your token', True, VIOLET) #text color, bg color
                 box=prompts.get_rect(center=(500,600))
                 windowSurface.blit(prompts,box)
-                
+
             windowSurface.blit(start,startbox)
             windowSurface.blit(back,backbox)
             pygame.display.flip()
