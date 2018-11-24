@@ -2,9 +2,8 @@ import pygame, sys, random,time
 from pygame.locals import *
 pygame.init()
 size=(1024,768)
-windowSurface = pygame.display.set_mode((size), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((size), 0, 32)
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
-background=pygame.image.load('Images/grainy_frame.png')
 
 ManageFont = pygame.font.SysFont(None, 30)
 ManageFont2= pygame.font.SysFont(None, 36)
@@ -97,20 +96,20 @@ def Manage(player):
         string=ManageFont.render('Properties:',True,WHITE)
         stringbox=string.get_rect(center=(e,23*f/10))
         windowSurface.blit(string,stringbox)
-    while not done:       
+    while not done:
         windowSurface.fill((150,200,255))
         windowSurface.blit(backarrow,backbox)
         pygame.draw.rect(windowSurface,BLACK,(size[0]/2-((0.78125*size[1])/2), size[0]/10.0, 0.78125*size[1],0.78125*size[1]),5)
         purble=pygame.draw.rect(windowSurface,Colour2,(size[0]/2-((0.78125*size[1])/2), size[0]/10.0, 0.78125*size[1],0.78125*size[1]))
         windowSurface.blit(pygame.transform.scale(CurrentTab, (int(0.78125*size[1]),int(1.948051948051948*41))), (size[0]/2-((0.78125*size[1])/2), size[0]/10.0))
-        for b in range(4):                                
+        for b in range(4):
             if b==value:
                 text=ManageFont2.render(templist[b],True,WHITE)
                 tempboxes[b].centerx-=5
             else:
                 text=ManageFont.render(templist[b],True,WHITE)
             #w=pygame.draw.rect(windowSurface,(255,0,0),(tempboxes[b].left,tempboxes[b].top-5,tempboxes[b].width,tempboxes[b].height+10))
-                
+
             windowSurface.blit(text,tempboxes[b])
         tempboxes[value].centerx+=5
         texting()
@@ -125,7 +124,7 @@ def Manage(player):
                 pos=event.pos
                 if backbox.collidepoint(pos):
                     return
-                for b in range(4):                
+                for b in range(4):
                         if tempboxes[b].collidepoint(pos):
                             print 'hi',b
                             if b==0:

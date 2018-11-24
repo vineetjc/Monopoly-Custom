@@ -27,9 +27,6 @@ def main():
         for event in events:
             # close it x button is pressed
             if event.type == QUIT: return
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                print "hi"
-
         # clear the screen
         screen.fill((255,255,255))
         # update txtbx

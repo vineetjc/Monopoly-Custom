@@ -1,10 +1,10 @@
-import pygame,sys,random,time,eztext
+import pygame, sys, random, time, eztext
 from tokenselect import *
 from pygame.locals import *
 pygame.init()
 
 #setup the window display
-windowSurface = pygame.display.set_mode((960,640), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((960,640), 0, 32) #the tuple has pixels #display is a module within pygame
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 windowSurface.set_alpha(None)
 
@@ -24,17 +24,13 @@ clock=pygame.time.Clock()
 
 blah=0 #links with main program, just a ref.  variable
 
-#finally done logic
-#textbox definitions should be outside loop
-#NEED TO WORK ON TYPING SPEED!!!!!!
-
-playername=pygame.image.load('Images/bgggs.jpg')
+playername=pygame.image.load('Images/playerinputbg.jpg')
 ok=pygame.image.load('Images/ok.jpg')
 back=pygame.image.load('Images/back.png')
-bg1=pygame.image.load('Images/bg1.jpg')
-                      
+bg1=pygame.image.load('Images/settokensbg.jpg')
 
-#error messages for more than 4 players pop up/wrong inputs
+
+#error messages
 Error=basicFont.render('Enter again, total players on board not more than 4',True,ORANGE)
 Message=Error.get_rect(center=(650,100))
 Error2=basicFont.render('Enter a number only',True,ORANGE)
@@ -60,16 +56,15 @@ def Playerinput(playerno):
     step=0
     global blah #links with main program, just a ref.  variable
     global MEGALIST #to link with token selection
-    
+
     while step==0:
         while BIG==0:
             backbutton=back.get_rect(center=(400+20,200+10))
             okbox=ok.get_rect(center=(480+420+20,200+10))
-            print "YAYAYAYA"
             if playerno<4:
                 while CPUloop==1:
                     clock.tick(30)
-                    for event in pygame.event.get():   
+                    for event in pygame.event.get():
                         if event.type==QUIT:
                             pygame.quit()
                             sys.exit()
@@ -82,12 +77,10 @@ def Playerinput(playerno):
                                 pass
                             if backbutton.collidepoint(pos):
                                 pygame.time.delay(500)
-                                print "hallelujah"
                                 blah=1 #to link with main program
                                 return blah
-                            
+
                             if okbox.collidepoint(pos):
-                                print "entered"
                                 try:
                                     CPU=int(CPUno.value)
                                     if CPU<0:
@@ -104,8 +97,8 @@ def Playerinput(playerno):
                                         time.sleep(2)
                                         CPUno.value=''
                                         CPUloop=1
-                                    else:                                            
-                                        if CPU+playerno>4:                    
+                                    else:
+                                        if CPU+playerno>4:
                                             windowSurface.blit(Error,Message)
                                             pygame.display.flip()
                                             clock.tick(15)
@@ -115,12 +108,12 @@ def Playerinput(playerno):
                                         else:
                                             out=basicFont.render('Number of CPU players:'+str(CPUno.value), True, BLACK)
                                             Cout=out.get_rect(center=(480+117+20,200+10))
-                                            
+
                                             windowSurface.blit(out,Cout)
-                                            
+
                                             CPUloop=2
                                             BIG=2
-                                    
+
                                 except ValueError:
                                     if CPUno.value=='':
                                         pass
@@ -132,26 +125,23 @@ def Playerinput(playerno):
                                         CPUno.value=''
                                         CPUloop=1
 
-                        
+
                         #intend this block here
-                        
                         windowSurface.blit(pygame.transform.scale(playername, (960,640)), (0,0))
-                        
+
                         windowSurface.blit(ok,okbox)
-                        
+
                         windowSurface.blit(back,backbutton)
                         CPUno.update(pygame.event.get())
                         CPUno.draw(windowSurface)
                         pygame.display.flip()
-                
-            
+
                 TOTAL=CPU+playerno
-                
 
             else:
                 TOTAL=4
                 BIG=2
-            
+
         if BIG==2:
             #setting lists for text input instances and names
             Ptextbox=[]
@@ -160,20 +150,17 @@ def Playerinput(playerno):
                 Ptextbox.append('null')
                 Playername.append(0)
 
-            #the lists 
+            #the lists
             print Playername
             print Ptextbox
-                    
-            #making input instances for number of players                
+
+            #making input instances for number of players
             while p<playerno:
                 print "doing"
                 Ptextbox[p]=eztext.Input(maxlength=20, color=(255,0,0), prompt='Player '+str(p+1)+' name:')
                 p+=1
 
             BIG=1
-            
-
-            
 
         #reset p
         p=0
@@ -184,33 +171,6 @@ def Playerinput(playerno):
         while BIG==1:
             if p<playerno:
                 clock.tick(30)
-                '''for event in pygame.event.get():   
-                    if event.type==QUIT:
-                        pygame.quit()
-                        sys.exit()
-
-                    
-                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                        pos=event.pos
-                        if okbox.collidepoint(pos):
-                            loop=2
-                        if backbutton.collidepoint(pos):
-                            if p>0:
-                                p-=1
-                                i-=50
-                                continue
-                            if p==0:
-                                if playerno==4:
-                                    pos=event.pos
-                                    if backbutton.collidepoint(pos):
-                                        pygame.time.delay(500)
-                                        print "hallelujah"
-                                        blah=1 #to link with main program
-                                        return blah
-                                else:
-                                    BIG=0
-                                    CPUloop=1
-                                    break''' 
                 for event in pygame.event.get():
                     mouse=pygame.mouse.get_pressed()
                     if mouse[0]:
@@ -230,23 +190,22 @@ def Playerinput(playerno):
                                     pos=event.pos
                                     if backbutton.collidepoint(pos):
                                         pygame.time.delay(500)
-                                        print "hallelujah"
                                         blah=1 #to link with main program
                                         return blah
                                 else:
                                     BIG=0
                                     CPUloop=1
-                                    break                
-                                                 
-                        
-                #text inputs   WHERE TO INTEND THIS BLOCK!!!!!   
+                                    break
+
+
+                #text inputs   WHERE TO INTEND THIS BLOCK!!!!!
                     if loop==1:
                         clock.tick(30)
                         try:
                             Ptextbox[p].set_pos(480+20,i)
                         except AttributeError:
                             pass
-                        
+
                         windowSurface.blit(pygame.transform.scale(playername, (960,640)), (0,0))
                         if playerno<4:
                             windowSurface.blit(out,Cout)
@@ -268,20 +227,20 @@ def Playerinput(playerno):
                         Ptextbox[p].draw(windowSurface)
                         Ptextbox[p].update(pygame.event.get())
                         pygame.display.flip()
-                        
-                    #reset value    
+
+                    #reset value
                     if loop==2:
                         print "entered"
                         print Ptextbox[p].value     #value of entered text (module definition)
                         Playername[p]=Ptextbox[p].value
-                        print "Player",p+1,"name:", Playername[p]     
+                        print "Player",p+1,"name:", Playername[p]
                         loop=1
                         i+=50
                         p+=1
                         pygame.display.flip() #INSERTED NOW
                 #exitting loop once done
             if p==playerno:
-                for event in pygame.event.get():   
+                for event in pygame.event.get():
                     mouse=pygame.mouse.get_pressed()
                     if mouse[0]:
                         try:
@@ -310,9 +269,8 @@ def Playerinput(playerno):
                     windowSurface.blit(Playertext,Playerbox)
                     windowSurface.blit(Advance,Advancebox)
                     pygame.display.flip()
-                                          
+
         if BIG==3:
-            print 'biggy 3'
             k=1
             for i in range(TOTAL):
                 if Ptextbox[i]=='null':
@@ -326,26 +284,21 @@ def Playerinput(playerno):
             BIG=5
 
         while BIG==5:
-            print 'hi my name is vineet nice to mee you'
             a=tokenselect(playerno,MEGALIST) #need to do this as a variable else it does again and again
-            print 'OHOOOOOOOOOOOOOOO'
             BIG=6
             break
-        
+
         if BIG==6:
-            print 'token done'
             if a==10001:
-                print "dude we're going back"
                 BIG=1
                 step=0
                 loop=1
                 p=playerno
-                
+
             if a==10002:
                 BIG=15000
-                print 'ya ya this one'
                 step=13000
                 return
-            
+
 #playerno=2
 #Playerinput(playerno)

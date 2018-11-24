@@ -6,7 +6,7 @@ from pygame.locals import *
 pygame.init()
 
 #setup the window display
-windowSurface = pygame.display.set_mode((960,640), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((960,640), 0, 32)  
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 
 #setup font
@@ -22,14 +22,14 @@ VIOLET = (148,0,221)
 ORANGE = (255,140,0)
 YELLOW=(255,215,0)
 
-Car=pygame.image.load('Tokens/Car.jpeg')
-Dog=pygame.image.load('Tokens/Dog.jpeg')
-Thimble=pygame.image.load('Tokens/Thimble.jpeg')
-Trolley=pygame.image.load('Tokens/Trolley.jpeg')
-Ship=pygame.image.load('Tokens/Ship.jpeg')
-Iron=pygame.image.load('Tokens/Iron.jpeg')
-Hat=pygame.image.load('Tokens/Hat.jpeg')
-Shoe=pygame.image.load('Tokens/Shoe.jpeg')
+Car=pygame.image.load('Images//Tokens/Car.jpeg')
+Dog=pygame.image.load('Images//Tokens/Dog.jpeg')
+Thimble=pygame.image.load('Images//Tokens/Thimble.jpeg')
+Trolley=pygame.image.load('Images//Tokens/Trolley.jpeg')
+Ship=pygame.image.load('Images//Tokens/Ship.jpeg')
+Iron=pygame.image.load('Images//Tokens/Iron.jpeg')
+Hat=pygame.image.load('Images//Tokens/Hat.jpeg')
+Shoe=pygame.image.load('Images//Tokens/Shoe.jpeg')
 
 start=pygame.image.load('Images/home.png')
 back=pygame.image.load('Images/back.png')
@@ -38,7 +38,7 @@ backbox=back.get_rect(center=(40,18.5))
 togame=pygame.image.load('Images/ok.jpg')
 togamebox=togame.get_rect(center=(920,640-18.5))
 
-BG=pygame.image.load('Images/images.jpg')
+BG=pygame.image.load('Images/tokenselectbg.jpg')
 playercolour=[RED,GREEN,BLUE,YELLOW]
 tokenlist=[Car,Dog,Thimble,Trolley, Ship, Iron, Hat, Shoe]
 PLAYERTOKENS=[]

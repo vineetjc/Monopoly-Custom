@@ -3,15 +3,15 @@ from tokenselect import PLAYERTOKENS, SUPER
 from pygame.locals import *
 slides=[]
 for i in range(2):
-    a=pygame.image.load('Some tips and tricks//Slide'+str(i+1)+'.jpg')
+    a=pygame.image.load('Images//Some tips and tricks//Slide'+str(i+1)+'.jpg')
     slides.append(a)
 
-BG=pygame.image.load('Images/bg1.jpg')
+BG=pygame.image.load('Images/settokensbg.jpg')
 
 pygame.init()
 
 #setup the window display
-windowSurface = pygame.display.set_mode((960,640), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((960,640), 0, 32) #the tuple has pixels #display is a module within pygame
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 
 #setup font
@@ -34,8 +34,8 @@ text2 = basicFont.render('Setting the game board, please wait', True, BLACK)
 #dot dot dot
 dot=basicFont.render(".",True,VIOLET)
 
-#get_rect() "gets" a "rect"angle 
-textRect=text.get_rect(center=(480,550)) 
+#get_rect() "gets" a "rect"angle
+textRect=text.get_rect(center=(480,550))
 text2Rect=text2.get_rect(center=(440,100))
 #pygame.draw.rect(windowSurface, WHITE, (dotRect.left, dotRect.top, dotRect.width, dotRect.height))    #draw rectangle of text
 pygame.draw.rect(windowSurface, WHITE, (textRect.left, textRect.top, textRect.width, textRect.height))
@@ -59,16 +59,16 @@ def Tips(PLAYERTOKENS,SUPER):
     times=1
     global dot
     while times<30:
-        clock.tick(30)    
-        for event in pygame.event.get():   
+        clock.tick(30)
+        for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
-                sys.exit()    
+                sys.exit()
 
         windowSurface.blit(pygame.transform.scale(slides[j], (960,640)), (0,0))
         windowSurface.blit(text, textRect)
-        #the dot dot dot loading        
-        dotRect = dot.get_rect(center=(i,550))                
+        #the dot dot dot loading
+        dotRect = dot.get_rect(center=(i,550))
         windowSurface.blit(dot, dotRect)
         time.sleep(0.5)
         i+=10
@@ -83,8 +83,8 @@ def Tips(PLAYERTOKENS,SUPER):
     i=740
     dot=basicFont.render(".",True,BLACK)
     while loop==1:
-        clock.tick(30)    
-        for event in pygame.event.get():   
+        clock.tick(30)
+        for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
                 sys.exit()
@@ -97,7 +97,7 @@ def Tips(PLAYERTOKENS,SUPER):
                 q=m #to set back m value at end, ref. variable
                 windowSurface.blit(pygame.transform.scale(BG, (960,640)), (0,0))
                 windowSurface.blit(text2, text2Rect)
-                dotRect = dot.get_rect(center=(i,100))                
+                dotRect = dot.get_rect(center=(i,100))
                 windowSurface.blit(dot, dotRect)
                 time.sleep(0.2)
                 i+=10

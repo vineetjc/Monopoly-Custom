@@ -2,7 +2,7 @@ import pygame, sys, random,time, eztext
 from pygame.locals import *
 slides=[]
 for i in range(18):
-    a=pygame.image.load('HOW TO PLAY/slide'+str(i+1)+'.jpg')
+    a=pygame.image.load('Images/HOW TO PLAY/slide'+str(i+1)+'.jpg')
     slides.append(a)
 
 pygame.init()
@@ -14,7 +14,7 @@ screenSize =  user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 size=(screenSize)
 size=(960,640)
 #setup the window display
-windowSurface = pygame.display.set_mode((size), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((size), 0, 32)
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 #dude=pygame.display.set_mode((size) , pygame.FULLSCREEN)
 #setup font
@@ -37,8 +37,8 @@ clock=pygame.time.Clock()
 
 def howtoplay(size):
     #previous and next buttons
-    Prev=pygame.image.load("HOW TO PLAY/Prev.png")
-    Next=pygame.image.load("HOW TO PLAY/Next.png")
+    Prev=pygame.image.load("Images/HOW TO PLAY/Prev.png")
+    Next=pygame.image.load("Images/HOW TO PLAY/Next.png")
     Prevclick=Prev.get_rect(center=(89,46))
     Nextclick=Next.get_rect(center=(size[0]-53,46))
     if size==(960,640):
@@ -51,8 +51,8 @@ def howtoplay(size):
     ref=1
     while True:
         clock.tick(30)
-        
-        for event in pygame.event.get():   
+
+        for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
                 sys.exit()
@@ -76,24 +76,23 @@ def howtoplay(size):
                         ref=0
                     else:
                         pass
-                
-                
-            if i<=17: 
+
+
+            if i<=17:
                 windowSurface.blit(pygame.transform.scale(slides[i], size), (0,0))
                 if i>=1:
                     windowSurface.blit(Prev,Prevclick)
                 else:
                     windowSurface.blit(back,backclick)
-                if i<17:    
+                if i<17:
                     windowSurface.blit(Next,Nextclick)
-                
+
                 else:
-                    windowSurface.blit(back,backclick)    
-                
-            
+                    windowSurface.blit(back,backclick)
+
+
         if ref==0:
             break
         pygame.display.flip()
 
 #howtoplay()
-        

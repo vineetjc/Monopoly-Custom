@@ -1,6 +1,6 @@
 import pygame, sys, random, math
 from pygame.locals import *
-#for initialisation of necessary steps
+#initialize pygame
 pygame.init()  
 import ctypes #foreign function library, provides C compatible data types etc.
 
@@ -9,7 +9,7 @@ screenSize =  user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 size=(screenSize)
 size=(1024,768)
 #setup the window display
-windowSurface = pygame.display.set_mode((size), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((size), 0, 32)  
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 #pygame.display.set_mode((size) , pygame.FULLSCREEN)
 # set up fonts
@@ -27,7 +27,7 @@ GOLD = (255,215,0)
 YELLOW = (255,255,0)
 
 #images
-cart=pygame.image.load('Images/bb.jpg')
+cart=pygame.image.load('Images/cart.jpg')
 coin=pygame.image.load('Images/coin.jpg')
 bluecoin=pygame.image.load('Images/bluecoin.jpg')
 bomb=pygame.image.load('Images/bomb.png')

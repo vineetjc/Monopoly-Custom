@@ -1,3 +1,3 @@
-![](Images/skyline.jpeg)
+![](Images/homescreen.jpeg)
 
-![](Images/board22.jpg)
+![](Images/boardimg.jpg)

@@ -26,7 +26,7 @@ posdict[31]=(posdict[30][0]+2*sixtythree-(sixtythree/2),posdict[30][1])
 for i in range(32,41):
     posdict[i]=(posdict[i-1][0],posdict[i-1][1]+sixtythree)
 
-boardimg=pygame.image.load('Images/board22.jpg')
+boardimg=pygame.image.load('Images/boardimg.jpg')
 def BoardDisplay(windowSurface):
     windowSurface.blit(pygame.transform.scale(boardimg,(size[1],size[1])),((size[0]-size[1])/2,0))
 

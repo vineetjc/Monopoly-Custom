@@ -9,10 +9,10 @@ from manage import *
 from Players import *
 from trade import *
 
-#for initialisation of necessary steps
+#initialize pygame
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load('Sound Track/Nanana.mp3')
+pygame.mixer.music.load('Sound Track/Game Music.mp3')
 pygame.mixer.music.set_volume(0.17) #need to decide this versus other SFX
 pygame.mixer.music.play(-1)
 pygame.time.delay(700)
@@ -79,7 +79,7 @@ screenSize =  user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 size=(screenSize)
 size=(1024,768)
 #setup the window display
-windowSurface = pygame.display.set_mode((size), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((size), 0, 32)  
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 #dude=pygame.display.set_mode((size) , pygame.FULLSCREEN)
 
@@ -113,7 +113,7 @@ P4Colour=(213,234,211)
 PxColours=[P1Colour,P2Colour,P3Colour,P4Colour]
 
 #board image
-boardimg=pygame.image.load('Images/board22.jpg')
+boardimg=pygame.image.load('Images/boardimg.jpg')
 
 #OPTIONS: texts and boxes
 rolldice=pygame.image.load('Images/Options/dicebutton.png')
@@ -330,10 +330,10 @@ posdict[31]=(posdict[30][0]+2*sixtythree-(sixtythree/2),posdict[30][1])
 for i in range(32,41):
     posdict[i]=(posdict[i-1][0],posdict[i-1][1]+sixtythree)
 
-Token=pygame.image.load('Tokens/Dog.jpeg')
+Token=pygame.image.load('Images//Tokens/Dog.jpeg')
 token=pygame.transform.scale(Token,(size[0]/22,size[0]/22))
 
-Token2=pygame.image.load('Tokens/Shoe.jpeg')
+Token2=pygame.image.load('Images//Tokens/Shoe.jpeg')
 token2=pygame.transform.scale(Token2,(size[0]/22,size[0]/22))
 
 

@@ -1,4 +1,4 @@
-import random,pygame
+import random, pygame
 from Properties import *
 from battleshipthingy import *
 size=(1024,768)
@@ -10,7 +10,7 @@ position=(size[0]-size[1])/2 + size[1]-70
 positionx = (size[0]-size[1])/2 + (0.904947916667*size[1])
 positiony=size[1]-(0.065104166667*size[1])
 
-sixtythree=0.08203125*size[1] #because in 1024x768, the step value for token is 63 
+sixtythree=0.08203125*size[1] #because in 1024x768, the step value for token is 63
 
 #idea : use {'position number: coordinates'}!!!! 1 is GO
 posdict={1:(positionx,positiony),2:(positionx-sixtythree,positiony),3:(positionx-2*sixtythree,positiony),4:(positionx-3*sixtythree,positiony),5:(positionx-4*sixtythree,positiony),6:(positionx-5*sixtythree,positiony),7:(positionx-6*sixtythree,positiony),8:(positionx-7*sixtythree,positiony),9:(positionx-8*sixtythree,positiony),10:(positionx-9*sixtythree,positiony),11:(positionx-10*sixtythree,positiony+sixtythree/3),'Jail':(positionx-10*sixtythree,positiony-sixtythree/3),12:(positionx-11*sixtythree+(sixtythree/2),positiony-2*sixtythree+(sixtythree/2))}
@@ -27,13 +27,13 @@ for i in range(32,41):
 #this is the property card with position dictionary
 poscard={}
 for i in Properties:
-    card=pygame.image.load('The Cards/Property Cards/'+i.Name+'.png')
+    card=pygame.image.load('Images//The Cards/Property Cards/'+i.Name+'.png')
     poscard[i.Position]=card
 
 buy=pygame.image.load('Images/buy icon.png')
 auction=pygame.image.load('Images/auction icon.png')
 
-boardimg=pygame.image.load('Images/board22.jpg')
+boardimg=pygame.image.load('Images/boardimg.jpg')
 def BoardDisplay(windowSurface):
     windowSurface.blit(pygame.transform.scale(boardimg,(size[1],size[1])),((size[0]-size[1])/2,0))
 
@@ -70,14 +70,14 @@ class Player:
         self.Position=1 #initially, it changes with time
         self.Turns=0 #just for referring to number of turns played, for zero turns no Go money.
         self.Doublecount=0
-        
-        
+
+
     def PlayerSpaces(self,windowSurface):  #will only work after completion, variables adjusted
         box=self.Peg.get_rect(center=posdict[self.Position])
-        windowSurface.blit(self.Peg,box)        
+        windowSurface.blit(self.Peg,box)
 
 
-    
+
     def Move(self,dicenumbers,Players,windowSurface):
         if self.Doublecount<3:
             #this is for dice roll, two variables give dice effect
@@ -90,7 +90,7 @@ class Player:
             Bbox=diceB.get_rect(center=(posdict[13][0]+7*sixtythree/2,posdict[13][1]))
             if a==b:
                 self.Doublecount+=1
-            Roll=a+b            
+            Roll=a+b
             if self.Doublecount==3:
                 print 'self.Jail()'
             else: #visual of token movement
@@ -99,7 +99,7 @@ class Player:
                 while p<=Roll:
                     if q==40:
                         q=0
-                        self.Cash+=200                    
+                        self.Cash+=200
                     o=q
                     self.Position=o+1
                     BoardDisplay(windowSurface)
@@ -127,7 +127,7 @@ class Player:
                     #break
                 if self.Position in [5,39]:
                     self.Tax()
-                    #break            
+                    #break
                 if self.Position in [1,11]:
                     pass
                 if self.Position==31:
@@ -135,7 +135,7 @@ class Player:
                     #break
                 if self.Position==21:
                     self.FreeParking()
-                    #break            
+                    #break
                 else:
                     self.Propertyland(Players)
                     #break
@@ -144,7 +144,7 @@ class Player:
             print 'rolling again...'
             pygame.time.delay(100)
             self.Move(dicenumbers,Players,windowSurface)
-        
+
     def Propertyland(self,Players):
         for i in Properties:
             if self.Position==i.Position:
@@ -177,7 +177,7 @@ class Player:
                     elif i.Position in [j.Position for j in Green]:
                         boxcolour=(76,175,80)
                     elif i.Position in [j.Position for j in DarkBlue]:
-                        boxcolour=(56,79,146)                        
+                        boxcolour=(56,79,146)
                     elif i.Position in [j.Position for j in Pink]:
                         boxcolour=(239,67,138)
                     pygame.draw.rect(windowSurface, boxcolour, (size[0]/2-139,size[1]/2 + 178,280,42))
@@ -202,7 +202,7 @@ class Player:
                                     i.Auction(Players)
                                 done=True
                                 break
-                                    
+
                     """ask=raw_input('buy/auction??:')
                     if ask=='buy':
                         i.Buy()
@@ -211,9 +211,9 @@ class Player:
                         i.Owner=self.Name
                     if ask=='auction':
                         i.Auction(Players)"""
-                
-                    
-                            
+
+
+
 
     def SMEland(self):
         print 'Visual display You have collected one SME point'
@@ -224,7 +224,7 @@ class Player:
         arrowLbox=arrowL.get_rect(center=(500,230))
         basicFont = pygame.font.SysFont(None, 32)
         text=basicFont.render('Pick a chance card',True,BLACK)
-        box=text.get_rect(center=(650,230))        
+        box=text.get_rect(center=(650,230))
         done=False
         while not done:
             windowSurface.blit(arrowL,arrowLbox)
@@ -245,7 +245,7 @@ class Player:
             self.Cash+=200
             self.Position=1
             BoardDisplay(windowSurface)
-            card=pygame.image.load('The Cards/Chance/Advance to Go.png')
+            card=pygame.image.load('Images//The Cards/Chance/Advance to Go.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -259,23 +259,7 @@ class Player:
             if self.Position==37:
                 self.Cash+=200              #Advances through Go
             self.Position=25
-            card=pygame.image.load('The Cards/Chance/Lanercost.png')
-            cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
-            windowSurface.blit(card,cardbox)
-            pygame.display.flip()
-            pygame.time.delay(3000)            
-            BoardDisplay(windowSurface)            
-            for person in Players:
-                person.PlayerSpaces(windowSurface)
-                pygame.display.flip()
-            #self.Propertyland(Players)
-            
-        if heavy==2: #Roselake
-            print 'Advance to Roselake'
-            if self.Position==37 or self.Position==23:
-                self.Cash+=200
-            self.Position=12
-            card=pygame.image.load('The Cards/Chance/Roselake.png')
+            card=pygame.image.load('Images//The Cards/Chance/Lanercost.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -285,16 +269,32 @@ class Player:
                 person.PlayerSpaces(windowSurface)
                 pygame.display.flip()
             #self.Propertyland(Players)
-            
+
+        if heavy==2: #Roselake
+            print 'Advance to Roselake'
+            if self.Position==37 or self.Position==23:
+                self.Cash+=200
+            self.Position=12
+            card=pygame.image.load('Images//The Cards/Chance/Roselake.png')
+            cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
+            windowSurface.blit(card,cardbox)
+            pygame.display.flip()
+            pygame.time.delay(3000)
+            BoardDisplay(windowSurface)
+            for person in Players:
+                person.PlayerSpaces(windowSurface)
+                pygame.display.flip()
+            #self.Propertyland(Players)
+
         if heavy==3:  #Next Star Space
             print 'Visual Go to SME point'
             if self.Position==8:
-                self.Position=13       
+                self.Position=13
             if self.Position==23:
-                self.Position=29                
+                self.Position=29
             if self.Position==37:
                 self.Position=13
-            card=pygame.image.load('The Cards/Chance/Advance to Next Star Space.png')
+            card=pygame.image.load('Images//The Cards/Chance/Advance to Next Star Space.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -307,12 +307,12 @@ class Player:
         if heavy==4:  #Next Teleport
             print 'Visual Choose your next destination to Telelport'
             if self.Position==8:
-                self.Position=16                
+                self.Position=16
             if self.Position==23:
                 self.Position=26
             if self.Position==37:
                 self.Position=6
-            card=pygame.image.load('The Cards/Chance/Advance to nearest Teleport.png')
+            card=pygame.image.load('Images//The Cards/Chance/Advance to nearest Teleport.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -327,7 +327,7 @@ class Player:
                 self.GOOJ+=1
                 print 'Visual You have got one Get out of Jail Card'
                 print 'GOOJ card can be traded or used when in trouble!'
-                card=pygame.image.load('The Cards/Chance/Get out of Jail Card.png')
+                card=pygame.image.load('Images//The Cards/Chance/Get out of Jail Card.png')
                 cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
                 windowSurface.blit(card,cardbox)
                 pygame.display.flip()
@@ -338,7 +338,7 @@ class Player:
         if heavy==6:
             print 'Visual Go back three Spaces!'
             self.Position-=3
-            card=pygame.image.load('The Cards/Chance/Go Back Three Spaces.png')
+            card=pygame.image.load('Images//The Cards/Chance/Go Back Three Spaces.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -350,7 +350,7 @@ class Player:
             #break
         if heavy==7:
             print 'Visual Go to Jail. Do not collect money from Go!'
-            card=pygame.image.load('The Cards/Chance/Go Directly to Jail.png')
+            card=pygame.image.load('Images//The Cards/Chance/Go Directly to Jail.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -364,7 +364,7 @@ class Player:
             #break
         if heavy==8:
             print 'Visual General repairs on all your property. Each house =25$   Each Hotel =100$'
-            card=pygame.image.load('The Cards/Chance/General Repairs.png')
+            card=pygame.image.load('Images//The Cards/Chance/General Repairs.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -379,11 +379,11 @@ class Player:
                     else:
                         housecount+=prop.Houses
             self.Cash-=(25*housecount + 100*hotelcount)
-                
+
             #Houses and Hotel                                                                                                                               #Houses and Hotel Variables
         if heavy==9:
             print 'Visual Pay Poor tax!'
-            card=pygame.image.load('The Cards/Chance/Poor Tax.png')
+            card=pygame.image.load('Images//The Cards/Chance/Poor Tax.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -393,7 +393,7 @@ class Player:
             #break
         if heavy==10:
             print 'Visual You inherit $100 from the bank!'
-            card=pygame.image.load('The Cards/Chance/Inherit $100 from the Bank.png')
+            card=pygame.image.load('Images//The Cards/Chance/Inherit $100 from the Bank.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -403,11 +403,11 @@ class Player:
         if heavy==11: #Hartlepool
             print 'Advance to Hartlepool'
             self.Position=40
-            card=pygame.image.load('The Cards/Chance/Advance to Hartlepool.png')
+            card=pygame.image.load('Images//The Cards/Chance/Advance to Hartlepool.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
-            pygame.time.delay(3000)            
+            pygame.time.delay(3000)
             BoardDisplay(windowSurface)
             for person in Players:
                 person.PlayerSpaces(windowSurface)
@@ -416,7 +416,7 @@ class Player:
             #break
         if heavy==12:
             print 'Visual you have been elected as Chairman of the Board;ive 50$ each to all players'         #Variable for number of players
-            card=pygame.image.load('The Cards/Chance/Chairman of the Board!.png')
+            card=pygame.image.load('Images//The Cards/Chance/Chairman of the Board!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -429,7 +429,7 @@ class Player:
             #break
         if heavy==13:
             print 'Visual Your building Loan Matures!! Collect $150'
-            card=pygame.image.load('The Cards/Chance/Building loan matures.png')
+            card=pygame.image.load('Images//The Cards/Chance/Building loan matures.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -439,7 +439,7 @@ class Player:
             #break
         if heavy==15:
             print 'Visual NEW ACHIEVEMENT!! BONUS GAME UNLOCKED!!!!!!!'
-            card=pygame.image.load('The Cards/Chance/Bonus Game Unlocked.png')
+            card=pygame.image.load('Images//The Cards/Chance/Bonus Game Unlocked.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -454,13 +454,13 @@ class Player:
                 print result, 'before'
                 #Play()
                 print 'points earned=', A.Points
-                
+
             if R==2:
                 #SEARCH! game
-                paisa=SEARCH(otherturn,otherversion)                
+                paisa=SEARCH(otherturn,otherversion)
                 self.Cash+=paisa
-                              
-                
+
+
             #break
         if heavy==14:
             print 'Visual Scratch Lottery Card'
@@ -469,8 +469,8 @@ class Player:
         Chances.pop(0)
         if heavy!=5:
             Chances.append(heavy)
-        
-            
+
+
 
     def Communitychest(self,Players,windowSurface):
         arrowL=pygame.image.load('Images/arrow.png')
@@ -478,7 +478,7 @@ class Player:
         arrowRbox=arrowR.get_rect(center=(520,560))
         basicFont = pygame.font.SysFont(None, 32)
         text=basicFont.render('Pick a community chest card',True,BLACK)
-        box=text.get_rect(center=(405,495))        
+        box=text.get_rect(center=(405,495))
         done=False
         while not done:
             windowSurface.blit(arrowR,arrowRbox)
@@ -499,7 +499,7 @@ class Player:
             self.Cash+=200
             self.Position=1
             BoardDisplay(windowSurface)
-            card=pygame.image.load('The Cards/Community Chest/Advance to Go!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Advance to Go!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -510,7 +510,7 @@ class Player:
                 pygame.display.flip()
         if heavy==1:
             print 'Visual Bank Error in your favor. Collect 200$'
-            card=pygame.image.load('The Cards/Community Chest/Bank Error in your Favor.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Bank Error in your Favor.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -520,7 +520,7 @@ class Player:
             #break
         if heavy==2:
             print 'Visual Sale of Stock, you get 50$'
-            card=pygame.image.load('The Cards/Community Chest/Sold your Stock!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Sold your Stock!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -533,19 +533,19 @@ class Player:
                 self.GOOJ+=1
                 print 'Visual You have got one Get out of Jail Card'
                 print 'GOOJ card can be traded or used when in trouble!'
-                card=pygame.image.load('The Cards/Community Chest/Get out of Jail Card.png')
+                card=pygame.image.load('Images//The Cards/Community Chest/Get out of Jail Card.png')
                 cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
                 windowSurface.blit(card,cardbox)
                 pygame.display.flip()
                 pygame.time.delay(3000)
                 GOOJchest-=1
             else:
-                self.Communitychest(Players,windowSurface)            
+                self.Communitychest(Players,windowSurface)
             #break
 
-        if heavy==4: 
+        if heavy==4:
             print 'Visual You have been JAILED!'
-            card=pygame.image.load('The Cards/Community Chest/Go Directly to Jail.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Go Directly to Jail.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -557,10 +557,10 @@ class Player:
                 pygame.display.flip()
             #self.Jail()
             #break
-        
-        if heavy==5:    
+
+        if heavy==5:
             print 'Visual Grand Opening Night; Collect 50$ from every player for opening seats!'                    #No of players variable
-            card=pygame.image.load('The Cards/Community Chest/Grand opening of Opera.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Grand opening of Opera.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -571,11 +571,11 @@ class Player:
                     i.Cash-=50
             BoardDisplay(windowSurface)
             #break
-        
+
 
         if heavy==6:
             print 'Visual Your Holiday Xmas  Fund matures! Collect $100'
-            card=pygame.image.load('The Cards/Community Chest/Your Holiday Fund Matures!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Your Holiday Fund Matures!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -586,7 +586,7 @@ class Player:
         if heavy==7:
             print 'Visual Income Tax Refund! Collect 20$'
             self.Cash+=20
-            card=pygame.image.load('The Cards/Community Chest/Income Tax Refund.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Income Tax Refund.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -595,7 +595,7 @@ class Player:
             #break
         if heavy==8:
             print 'Its your Birthday!!! Collect 10$ from each player'     #No of players variable
-            card=pygame.image.load('The Cards/Community Chest/Its your Birthday!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Its your Birthday!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -606,10 +606,10 @@ class Player:
                 if i!=self:
                     i.Cash-=10
             #break
-                                                                                                                                                                    
+
         if heavy==9:
             print 'Visual Your Insurance Matures! Collect 100$'
-            card=pygame.image.load('The Cards/Community Chest/Life Insurance Matures!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Life Insurance Matures!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -619,7 +619,7 @@ class Player:
             #break
         if heavy==10:
             print 'Visual Pay school Fees of 150$!'
-            card=pygame.image.load('The Cards/Community Chest/School Fee Tax!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/School Fee Tax!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -628,9 +628,9 @@ class Player:
             self.Cash-=150
             FreeParking.Loot+=150
             #break
-        if heavy==11: 
+        if heavy==11:
             print 'Visual Pay 20$ Hospital Fee!'
-            card=pygame.image.load('The Cards/Community Chest/Pay $20 as Hospital Fees!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Pay $20 as Hospital Fees!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -640,7 +640,7 @@ class Player:
             #break
         if heavy==12:
             print 'Visual you are asessed for street repairs! 40$ per house ,115$ per hotel   '                #Houses and Hotel Variables
-            card=pygame.image.load('The Cards/Community Chest/Assessed For Street Repairs!.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Assessed For Street Repairs!.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -661,7 +661,7 @@ class Player:
         if heavy==13:
             print 'You have won 2nd prize in a Beauty Contest! Collect 10$'
             self.Cash+=10
-            card=pygame.image.load('The Cards/Community Chest/2nd Prize in Beauty Contest.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/2nd Prize in Beauty Contest.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -670,7 +670,7 @@ class Player:
             #break
         if heavy==15:
             print'Visual NEW ACHIEVEMENT!! BONUS GAME UNLOCKED!!!!!!!'
-            card=pygame.image.load('The Cards/Community Chest/Bonus Game Unlocked.png')
+            card=pygame.image.load('Images//The Cards/Community Chest/Bonus Game Unlocked.png')
             cardbox=card.get_rect(center=(size[0]/2,size[1]/2))
             windowSurface.blit(card,cardbox)
             pygame.display.flip()
@@ -685,21 +685,21 @@ class Player:
                 print result, 'before'
                 #Play()
                 print 'points earned=', A.Points
-                
+
             if R==2:
                 #SEARCH! game
-                paisa=SEARCH(otherturn,otherversion)                
+                paisa=SEARCH(otherturn,otherversion)
                 self.Cash+=paisa
 
             #break
         if heavy==14:
             print 'Visual Scratch Lottery Card'
             #break
-            
+
         Chest.pop(0)
         if heavy!=3:
             Chest.append(heavy)
-         
+
 
 
     def Tax(self):
@@ -728,7 +728,7 @@ class Player:
         arrowD=pygame.transform.rotate(arrowR,270)
         arrowDbox=arrowD.get_rect(center=(posdict[6][0],posdict[6][1]-3*sixtythree/2))
         exitcheck=0
-        while True:        
+        while True:
             windowSurface.blit(arrowL,arrowLbox)
             windowSurface.blit(arrowU,arrowUbox)
             windowSurface.blit(arrowR,arrowRbox)
@@ -763,10 +763,10 @@ class Player:
                             exitcheck=1
             if exitcheck==1:
                 break
-                        
 
-        
-#notes and waste about Propertyland and TeleportLand 
+
+
+#notes and waste about Propertyland and TeleportLand
 """
 for i in Properties.Properties:
 if self.Position==i.Position:
@@ -790,7 +790,7 @@ def Teleportland(self):
 img=pygame.image.load('Temp/Cursor.gif')
 '''VISUAL loop on teleporting locations'''
 fps=30
-imgx=10    #Coordinates of all four plots on the board 
+imgx=10    #Coordinates of all four plots on the board
 imgy=10    #Coordinates of all four plots on the board
 pixmove=4
 fpstime=pygame.time.Clock()
@@ -802,12 +802,12 @@ movement == 'up'
 
 setDisplay.blit(img,(imgx,imgy))
 '''Visual Single click on place to teleport'''
-#Incomplete 
+#Incomplete
 
 ask click input from user on self.Position
 change on click, it will be either of these [6,16,26,36]
 """
-    
+
 #SME manage mode
 """
         if self.SME==3:                  #Praveena
@@ -819,14 +819,14 @@ change on click, it will be either of these [6,16,26,36]
         '''Visual to convert SME points into money'''
         '''If yes'''
          self.Cash+=(200*self.SME)
-        
+
         show display message on how many collected
         '''VISUAL Show how many SME points collected at right side'''
 
 """
 
 #Jail function needs to be worked on!!
-"""        
+"""
     def Jail(self):
         a=1
         b=2
@@ -852,15 +852,11 @@ change on click, it will be either of these [6,16,26,36]
             roll=a+b
             for i in range(roll):
                 self.position+=1
-        
+
         moving not allowed. other actions are allowed so trading jail card is within the option
-    
+
         ii) roll doubles and break out
-            if doubles come, immediately move that many turns, and stop. 
+            if doubles come, immediately move that many turns, and stop.
             if all turns finish go to option (i)
-        
+
 """
-
-        
-        
-

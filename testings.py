@@ -38,7 +38,7 @@ pygame.init()
 
 picture=pygame.image.load('loadingimage.png')
 
-windowSurface = pygame.display.set_mode((960,640), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((960,640), 0, 32)  
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 
 ORANGE = (255,140,0)

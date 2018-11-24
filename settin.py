@@ -2,10 +2,10 @@
 import pygame, sys, random,time
 from pygame.locals import *
 from howtoplay import *
-#for initialisation of necessary steps
+#initialize pygame
 pygame.init()
 size=(1024,768)
-windowSurface = pygame.display.set_mode((size), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((size), 0, 32)  
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 Colour2=(182,143,182) #BOX COLOUR
 Colour2L=(215,194,215) #BG COLOUR

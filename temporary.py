@@ -72,9 +72,9 @@ hello.Move()
 import pygame,os
 pygame.init()
 pygame.mixer.init()
-windowSurface = pygame.display.set_mode((400,400), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((400,400), 0, 32)  
 
-pygame.mixer.music.load('Sound Track/Nanana.mp3')
+pygame.mixer.music.load('Sound Track/Game Music.mp3')
 pygame.mixer.music.play(-1)
 
 while True:

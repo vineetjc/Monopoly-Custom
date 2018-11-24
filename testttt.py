@@ -1,9 +1,9 @@
 '''import pygame, sys, random
 from pygame.locals import *
-#for initialisation of necessary steps
+#initialize pygame
 pygame.init()  
 #setup the window display
-windowSurface = pygame.display.set_mode((960,640), 0, 32) #the tuple has pixels #display is a module within pygame 
+windowSurface = pygame.display.set_mode((960,640), 0, 32)  
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 #set colors R,G,B code
 BROWN = (139,69,19)
