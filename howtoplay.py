@@ -2,7 +2,7 @@ import pygame, sys, random,time, eztext
 from pygame.locals import *
 slides=[]
 for i in range(18):
-    a=pygame.image.load('Images/HOW TO PLAY/slide'+str(i+1)+'.jpg')
+    a=pygame.image.load('Images/HOW TO PLAY/Slide'+str(i+1)+'.JPG')
     slides.append(a)
 
 pygame.init()

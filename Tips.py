@@ -3,7 +3,7 @@ from pygame.locals import *
 
 slides=[]
 for i in range(2):
-    a=pygame.image.load('Images//Some tips and tricks//Slide'+str(i+1)+'.jpg')
+    a=pygame.image.load('Images//Some tips and tricks//Slide'+str(i+1)+'.JPG')
     slides.append(a)
 
 BG=pygame.image.load('Images/settokensbg.jpg')
