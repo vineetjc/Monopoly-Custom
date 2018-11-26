@@ -111,7 +111,7 @@ while True:
 
         #Player name input and token select
         if menu==2:
-            playerinputdone=Playerinput(playerno)
+            playerinputdone, PLAYERTOKENS, names_and_icons =Playerinput(playerno)
             if not playerinputdone:
                 menu=1
                 break
@@ -121,8 +121,9 @@ while True:
 
         #False loading screen showing tips
         if menu==3:
-            Tips(PLAYERTOKENS,SUPER)
+            DETAILS = Tips(PLAYERTOKENS, names_and_icons)
             menu=4
+
         #The Game
         if menu==4:
             pygame.time.delay(2000)
