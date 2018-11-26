@@ -31,9 +31,9 @@ print load_profile.read()
 
 load_profile = open('playerdetaillog.txt','r')
 
-for i, l in enumerate(load_profile):#print i,l prints line number from 0 with content in each line!             
+for i, l in enumerate(load_profile):#print i,l prints line number from 0 with content in each line!
     pass
-playerno= (i + 1)/2 #number of lines (counts from 0) 
+playerno= (i + 1)/2 #number of lines (counts from 0)
 
 print 'players:',playerno
 
@@ -70,16 +70,9 @@ for i in Players:
 
 #end of it
 
-
-    
-import ctypes #foreign function library, provides C compatible data types etc.
-
-user32 = ctypes.windll.user32
-screenSize =  user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-size=(screenSize)
 size=(1024,768)
 #setup the window display
-windowSurface = pygame.display.set_mode((size), 0, 32)  
+windowSurface = pygame.display.set_mode((size), 0, 32)
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 #dude=pygame.display.set_mode((size) , pygame.FULLSCREEN)
 
@@ -91,7 +84,7 @@ twenty8=int(0.036458333334*size[1]) #font size for roll over displays in 1024x76
 
 Font = pygame.font.SysFont(None, twenty8) #same thing
 
-#set colors R,G,B code 
+#set colors R,G,B code
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
@@ -151,7 +144,7 @@ for image in optionslist:
     box=image.get_rect(center=(i,size[1]/2))
     iconboxes[optionslist.index(image)]=box
     i+=bello
-    
+
 #the central menu on the board! (complete other functions and use their call)
 def BoardMenu():
     for event in pygame.event.get():
@@ -161,25 +154,25 @@ def BoardMenu():
             for b in range(5):
                 if iconboxes[b].collidepoint(x,y):
                     if b==0:
-                        popup='Roll dice'                        
+                        popup='Roll dice'
                     elif b==1:
-                        popup='Manage'                        
+                        popup='Manage'
                     elif b==2:
                         popup='Trade'
                     elif b==3:
-                        popup='End Turn'                        
+                        popup='End Turn'
                     elif b==4:
-                        popup='Settings'                        
+                        popup='Settings'
                     ref=b
                     break
             try:
                 text=Font.render(popup,True,BLACK)
                 forty=int(0.052083333334*size[1]) #used below for spacing!!!!
                 box=text.get_rect(center=(iconboxes[ref].centerx,iconboxes[ref].centery+forty)) #for the spacing b/w text and icon
-                windowSurface.blit(text,box)                                           
+                windowSurface.blit(text,box)
             except UnboundLocalError:
                 pass
-            
+
         if event.type==MOUSEBUTTONDOWN and event.button==1:
             pos=event.pos
             for b in range(5):
@@ -188,7 +181,7 @@ def BoardMenu():
                         global Rollcheck
                         if Rollcheck==True:
                             player.Move(dicenumbers,Players,windowSurface)
-                            player.Turns+=1                            
+                            player.Turns+=1
                             Rollcheck=False
                     elif b==1:
                         print 'Manage'
@@ -204,7 +197,7 @@ def BoardMenu():
                             global loop
                             loop=1
                             print 'loop here:', loop
-                        
+
                     elif b==4:
                         print 'Settings'
                         a=Settings() #need to fix its loop end its so annoying now
@@ -214,16 +207,16 @@ def BoardMenu():
                             flag=True
                             #execfile('restarting.py')
                             #execfile('GAME.py')
-                        break                    
+                        break
                     ref=b
                     break
-                
+
 
         #fullscreen toggle!!! this is temporary, change method on this.
         if event.type==KEYDOWN and event.key==K_a:
-            dude=pygame.display.set_mode((size))            
+            dude=pygame.display.set_mode((size))
         if event.type==KEYDOWN and event.key==K_d:
-            dude=pygame.display.set_mode((size) , pygame.FULLSCREEN)            
+            dude=pygame.display.set_mode((size) , pygame.FULLSCREEN)
     for a in range(5):
         if a==0 and Rollcheck==False:
             windowSurface.blit(diceoff,iconboxes[a])
@@ -231,7 +224,7 @@ def BoardMenu():
             windowSurface.blit(endturnoff,iconboxes[a])
         else:
             windowSurface.blit(optionslist[a],iconboxes[a])
-    
+
 
 #the left screen division display!
 def LeftBar(i,Players):
@@ -268,7 +261,7 @@ def LeftBar(i,Players):
     text=Font.render('Properties:',True,BLACK)
     box=text.get_rect(center=(size[0]/18,6*size[1]/10))
     windowSurface.blit(text,box)
-    
+
 #the right screen division display!
 def RightBar(Players):
     right = (size[0]-size[1])/2 + size[1]
@@ -278,7 +271,7 @@ def RightBar(Players):
         Font.set_underline(True)
         text=Font.render('Player '+str(Players.index(boy)+1),True,BLACK)
         box=text.get_rect(center=(right+(size[0]-size[1])/4,yuhoo+5))
-        pygame.draw.rect(windowSurface,PxColours[Players.index(boy)],(right,box.top-5,(size[0]-size[1])/2,box.height+150))        
+        pygame.draw.rect(windowSurface,PxColours[Players.index(boy)],(right,box.top-5,(size[0]-size[1])/2,box.height+150))
         windowSurface.blit(text,box)
         Font.set_underline(False)
         yalla=pygame.draw.line(windowSurface, BLACK, (right,box.top-7), (size[0],box.top-7), 5)
@@ -298,10 +291,10 @@ def RightBar(Players):
         windowSurface.blit(text,box)
         text=Font.render(str(boy.SME),True,RED)
         box=text.get_rect(center=(right+(size[0]-size[1])/12,yuhoo+77))
-        windowSurface.blit(text,box)        
+        windowSurface.blit(text,box)
         yuhoo+=200
         pygame.draw.line(windowSurface, BLACK, (right,box.bottom+70), (size[0],box.bottom+70), 5)
-        
+
 
 #keep track of player token spaces in whole game!
 #Import all the pictures for tokens here, blit player tokens on the board by relating current position number to posdict value!!!!!!!!!!!!!!
@@ -316,7 +309,7 @@ position=(size[0]-size[1])/2 + size[1]-70
 positionx = (size[0]-size[1])/2 + (0.904947916667*size[1])
 positiony=size[1]-(0.065104166667*size[1])
 
-sixtythree=0.08203125*size[1] #because in 1024x768, the step value for token is 63 
+sixtythree=0.08203125*size[1] #because in 1024x768, the step value for token is 63
 
 #idea : use {'position number: coordinates'}!!!! 1 is GO
 posdict={1:(positionx,positiony),2:(positionx-sixtythree,positiony),3:(positionx-2*sixtythree,positiony),4:(positionx-3*sixtythree,positiony),5:(positionx-4*sixtythree,positiony),6:(positionx-5*sixtythree,positiony),7:(positionx-6*sixtythree,positiony),8:(positionx-7*sixtythree,positiony),9:(positionx-8*sixtythree,positiony),10:(positionx-9*sixtythree,positiony),11:(positionx-10*sixtythree,positiony+sixtythree/3),'Jail':(positionx-10*sixtythree,positiony-sixtythree/3),12:(positionx-11*sixtythree+(sixtythree/2),positiony-2*sixtythree+(sixtythree/2))}
@@ -341,8 +334,8 @@ www=1
 
 def BoardDisplay(windowSurface):
     windowSurface.blit(pygame.transform.scale(boardimg,(size[1],size[1])),((size[0]-size[1])/2,0))
-    
-        
+
+
 player='null' #initialize variable
 
 Rollcheck=True #this checks if he can roll dice
@@ -360,10 +353,10 @@ def GAME(Players): #the list containing class objects
             key = pygame.key.get_pressed()
             if key[pygame.K_ESCAPE]:
                 Settings()
-        while True:            
+        while True:
             for guy in Players:
-                player=guy                
-                print "Its Player",str(Players.index(guy)+1),"turn"                
+                player=guy
+                print "Its Player",str(Players.index(guy)+1),"turn"
                 while loop==0:
                     #putting quitting options for every player
                     for event in pygame.event.get():
@@ -377,7 +370,7 @@ def GAME(Players): #the list containing class objects
                     BoardDisplay(windowSurface)
                     BoardMenu()
                     if flag==True:
-                        return 500                       
+                        return 500
                     current=Players.index(guy)
                     LeftBar(current,Players)
                     RightBar(Players)
@@ -385,7 +378,7 @@ def GAME(Players): #the list containing class objects
                     for ey in Players:
                         ey.PlayerSpaces(windowSurface)
                     pygame.display.flip()
-                if loop==1: #end turn                    
+                if loop==1: #end turn
                     for person in Players:
                         print person.Name,"has:",person.Cash,'and:',person.SME,'SMEpoints'
                         print person.Name,'Properties:',
@@ -429,7 +422,7 @@ I. At the center of the board (use images for buttonclicks)
  with ESC   c. Help
  key)       d. Exit game
             (e. SFX and Music toggle, and screen resolution change - if we are adding)
-            
+
 ***********************************************************************
 
 II. Standard display at either sides
@@ -449,7 +442,7 @@ II. Standard display at either sides
 2. Right side - Players names and token with networth in respective color
                 small boxes
                     - if bankrupt, grey the box and disable
-                    - 
+                    -
 ***********************************************************************
 
 III. During Roll Dice

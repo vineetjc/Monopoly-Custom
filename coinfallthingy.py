@@ -2,11 +2,7 @@ import pygame, sys, random, math
 from pygame.locals import *
 #initialize pygame
 pygame.init()  
-import ctypes #foreign function library, provides C compatible data types etc.
 
-user32 = ctypes.windll.user32
-screenSize =  user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-size=(screenSize)
 size=(1024,768)
 #setup the window display
 windowSurface = pygame.display.set_mode((size), 0, 32)  

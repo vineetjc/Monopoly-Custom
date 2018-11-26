@@ -1,15 +1,11 @@
 import pygame, sys, random
 from pygame.locals import *
 #initialize pygame
-pygame.init()  
-import ctypes #foreign function library, provides C compatible data types etc.
+pygame.init()
 
-user32 = ctypes.windll.user32
-screenSize =  user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-size=(screenSize)
 size=(1024,768)
 #setup the window display
-windowSurface = pygame.display.set_mode((size), 0, 32)  
+windowSurface = pygame.display.set_mode((size), 0, 32)
 pygame.display.set_caption('Super Mumbo Epicness') #the title of window
 #pygame.display.set_mode((size) , pygame.FULLSCREEN)
 # set up fonts
@@ -48,15 +44,15 @@ def ScratchCard():
         for event in pygame.event.get():
             mouse=pygame.mouse.get_pressed()
             if mouse[0]: #i.e. is 'scratching'
-                #print 'yay'                
+                #print 'yay'
                 try:
                     x,y=event.pos
                 except:
                     pass
-                
-                if 182<=x<=840 and 384<=y<=628:                    
+
+                if 182<=x<=840 and 384<=y<=628:
                     a=windowSurface.blit(image,(event.pos[0]-10,event.pos[1]-10),(event.pos[0],event.pos[1],20,20)) #image, (at this place), (top,left,this much area)
-                else:                    
+                else:
                     pass
             else:
                 pass
@@ -68,5 +64,3 @@ def ScratchCard():
         pygame.display.flip()
 
 ScratchCard()
-
-
